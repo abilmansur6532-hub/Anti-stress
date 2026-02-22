@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anti-Stress Pack</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f2f4ff;
+  color: #333;
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(90deg, #5b7cfa, #7b9cff);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 26px;
+}
+
+/* NAV */
+nav {
+  margin-top: 10px;
+}
+
+nav button {
+  background: white;
+  color: #5b7cfa;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  margin: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+nav button:hover {
+  background: #e6ebff;
+}
+
+/* SECTIONS */
+section {
+  padding: 40px 15px;
+}
+
+/* CARD */
+.card {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+}
+
+h2 {
+  color: #5b7cfa;
+}
+
+/* INPUTS */
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+/* BUTTONS */
+.main-btn {
+  background: #5b7cfa;
+  color: white;
+  border: none;
+  padding: 14px;
+  margin-top: 20px;
+  width: 100%;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.main-btn:hover {
+  opacity: 0.9;
+}
+
+/* RESULT BOX */
+.result {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #eef1ff;
+}
+</style>
+</head>
+
+</body>
+
+<header>
+  <h1>Anti-Stress Pack</h1>
+  <p>Как стресс влияет на здоровье подростков</p>
+
+  <nav>
+    <button onclick="location.href='#home'">Главная</button>
+    <button onclick="location.href='#register'">Регистрация</button>
+    <button onclick="location.href='#test'">Тест</button>
+    <button onclick="location.href='#psychologists'">Психологи</button>
+  </nav>
+</header>
+
+<!-- HOME / START SCREEN -->
+<section id="home">
+  <div class="card">
+    <h2>Понимание стресса — первый шаг к здоровью</h2>
+
+    <p>
+      <b>Anti-Stress Pack</b> — это онлайн-платформа, созданная специально для школьников и студентов,
+      которые сталкиваются со стрессом из-за учёбы, экзаменов, будущего и постоянной усталости.
+    </p>
+
+    <p>
+      Мы предлагаем <b>бесплатный психологический тест из 20 вопросов</b>,
+      который помогает определить уровень стресса и понять,
+      как он влияет на ваше <b>эмоциональное и физическое здоровье</b>.
+    </p>
+
+    <p>
+      Тест анализирует:
+    </p>
+
+    <ul>
+      <li>уровень тревожности и эмоционального напряжения</li>
+      <li>качество сна и восстановление организма</li>
+      <li>уровень усталости, энергии и мотивации</li>
+      <li>физические симптомы стресса (головные боли, напряжение, слабость)</li>
+    </ul>
+
+    <p>
+      По итогам диагностики вы получаете <b>подробный анализ</b> своего состояния,
+      а также <b>конкретные жизненные рекомендации</b>,
+      которые помогут снизить стресс и предотвратить проблемы со здоровьем.
+    </p>
+
+    <button class="main-btn" onclick="location.href='#test'">
+      Пройти бесплатный тест
+    </button>
+  </div>
+</section>
+
+<!-- REGISTRATION -->
+
+  </div>
+</section>
+
+<!-- TEST SECTION -->
+<section id="test">
+  <div class="card">
+    <h2>Тест: как стресс влияет на ваше здоровье</h2>
+
+    <p class="small">
+      Отвечайте честно. Тест анонимный и занимает 5–7 минут.
+      Ответы помогут оценить влияние стресса на психику и физическое состояние.
+    </p>
+
+    <div id="questions"></div>
+
+    <button class="main-btn" onclick="calculateResult()">
+      Получить подробный анализ
+    </button>
+
+    <div id="testResult" class="result"></div>
+  </div>
+</section>
+<script>
+const questions = [
+  "Я просыпаюсь уставшим даже после сна",
+  "Мне сложно расслабиться даже в спокойной обстановке",
+  "Я часто чувствую тревогу или внутреннее напряжение",
+  "У меня бывают головные боли или чувство давления в голове",
+  "Я ощущаю напряжение в шее, плечах или спине",
+  "Мне трудно сосредоточиться на учёбе",
+  "Я быстро устаю в течение дня",
+  "Я плохо засыпаю или часто просыпаюсь ночью",
+  "Я чувствую снижение мотивации и интереса",
+  "Я раздражаюсь без явной причины",
+  "Я чувствую постоянную усталость",
+  "Я испытываю апатию или эмоциональное опустошение",
+  "Во время стресса у меня учащается сердцебиение",
+  "Я чувствую нехватку энергии",
+  "Стресс влияет на моё физическое самочувствие",
+  "Я переживаю из-за будущего",
+  "Я чувствую давление со стороны учёбы или ожиданий",
+  "Я замечаю снижение иммунитета (часто болею)",
+  "Мне сложно контролировать эмоции",
+  "Стресс мешает мне жить полноценной жизнью"
+];
+
+const questionsContainer = document.getElementById("questions");
+
+questions.forEach((q, index) => {
+  questionsContainer.innerHTML += `
+    <label><b>${index + 1}.</b> ${q}</label>
+    <select id="q${index}">
+      <option value="1">Никогда</option>
+      <option value="2">Иногда</option>
+      <option value="3">Часто</option>
+      <option value="4">Почти всегда</option>
+    </select>
+  `;
+});
+</script>
+<script>
+// ===== ANALYSIS LOGIC =====
+function calculateResult() {
+  let score = 0;
+  for (let i = 0; i < 20; i++) {
+    score += Number(document.getElementById("q" + i).value);
+  }
+
+  let resultHTML = "";
+
+  if (score <= 40) {
+    resultHTML = `
+    <h3>🟢 Низкий уровень стресса</h3>
+    <p>
+      Ваш уровень стресса находится в пределах нормы. Это значит, что
+      нервная система в целом справляется с нагрузкой.
+      Однако даже умеренный стресс при накоплении может привести к
+      хронической усталости.
+    </p>
+
+    <h4>Как стресс влияет на физическое здоровье:</h4>
+    <ul>
+      <li>временное напряжение мышц</li>
+      <li>повышенная утомляемость</li>
+      <li>снижение концентрации</li>
+    </ul>
+
+    <h4>Что делать:</h4>
+    <ul>
+      <li>спать не менее 7–8 часов</li>
+      <li>делать перерывы во время учёбы</li>
+      <li>регулярно двигаться (ходьба, спорт)</li>
+      <li>ограничить телефон перед сном</li>
+    </ul>
+    `;
+  } 
+  else if (score <= 60) {
+    resultHTML = `
+    <h3>🟡 Средний уровень стресса</h3>
+    <p>
+      Стресс уже заметно влияет на психику и тело.
+      Возможны проблемы со сном, головные боли, снижение энергии и
+      раздражительность.
+    </p>
+
+    <h4>Как это отражается на здоровье:</h4>
+    <ul>
+      <li>нарушение сна → хроническая усталость</li>
+      <li>ослабление иммунитета</li>
+      <li>напряжение мышц → боли в шее и спине</li>
+      <li>перепады настроения</li>
+    </ul>
+
+    <h4>Рекомендации:</h4>
+    <ul>
+      <li>чёткий режим сна</li>
+      <li>дыхательные практики (4–7–8)</li>
+      <li>планирование дня</li>
+      <li>снижение учебной перегрузки</li>
+      <li>разговор с психологом</li>
+    </ul>
+    `;
+  } 
+  else {
+    resultHTML = `
+    <h3>🔴 Высокий уровень стресса</h3>
+    <p>
+      У вас признаки хронического стресса.
+      Это состояние может серьёзно повлиять на физическое и психическое здоровье.
+    </p>
+
+    <h4>Опасность для организма:</h4>
+    <ul>
+      <li>повышенная нагрузка на сердце</li>
+      <li>гормональные сбои</li>
+      <li>частые болезни</li>
+      <li>эмоциональное выгорание</li>
+      <li>апатия и тревожные состояния</li>
+    </ul>
+
+    <h4>Что необходимо:</h4>
+    <ul>
+      <li>нормализовать сон</li>
+      <li>срочно снизить нагрузку</li>
+      <li>регулярная поддержка психолога</li>
+      <li>работа с тревогой и выгоранием</li>
+    </ul>
+
+    <p><b>Рекомендуем записаться на консультацию.</b></p>
+    `;
+  }
+
+  document.getElementById("testResult").innerHTML = resultHTML;
+}
+</script>
+
+<!-- PSYCHOLOGISTS -->
+<section id="psych">
+  <div class="card">
+  <h2>Психологи-студенты</h2>
+    <h3>Айдана К.</h3>
+    
+    <p class="small">
+      3 курс психологии. Подростковая тревожность, стресс из-за учёбы.
+    </p>
+    
+    <p><b>Цена:</b> 2000 ₸ / 45 мин (Telegram)</p>
+    <textarea placeholder="Написать сообщение психологу"></textarea>
+    <button>Отправить</button>
+  </div>
+
+  <div class="card">
+    <h3>Нурислам А.</h3>
+    <p class="small">
+      Эмоциональное выгорание, прокрастинация, проблемы со сном.
+    </p>
+    <p><b>Цена:</b> 2500 ₸ / 60 мин (Telegram)</p>
+    <textarea placeholder="Написать сообщение психологу"></textarea>
+    <button>Отправить</button>
+  </div>
+
+  <div class="card">
+    <h3>Диана М.</h3>
+    <p class="small">
+      Клиническое направление. Хронический стресс.
+      Работает под супервизией.
+    </p>
+    <p><b>Цена:</b> 3000 ₸ / 60 мин (Telegram)</p>
+    <textarea placeholder="Написать сообщение психологу"></textarea>
+    <button>Отправить</button>
+  </div>
+</section>
+
+<!-- REGISTRATION -->
+<section id="register">
+  <div class="card">
+  <h2>Регистрация</h2>
+    <input type="text" id="name" placeholder="Имя">
+    <input type="email" id="email" placeholder="Email">
+    <input type="Telegram" id="Telegram" placeholder="Telegram">
+    <select id="goal">
+      <option>Хочу пройти тест</option>
+      <option>Хочу консультацию</option>
+      <option>Хочу снизить стресс</option>
+    </select>
+    <button onclick="registerUser()">Зарегистрироваться</button>
+    <p id="regResult"></p>
+  </div>
+</section>
